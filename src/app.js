@@ -3,31 +3,51 @@ import {a, div, button, input} from '@cycle/dom';
 
 import {Observable} from 'rx';
 
-function megaSun ({x, y}) {
+function megaSun ({x, y}, t, children) {
+  const sunRotation = rotate({x: 0, y: 20}, t / 1000);
+
+  sunRotation.x += x;
+  sunRotation.y += y;
+
   return (
-    div('.mega-sun', {style: {top: y, left: x}})
+    div('.cluster', [
+      div('.mega-sun', {key: 0, style: {top: y + '%', left: x + '%'}}),
+      sun(sunRotation, t)
+    ])
   );
 }
 
-function sun ({x, y}) {
+function sun ({x, y}, t) {
+  const planetRotation = rotate({x: 100, y: 200}, (t / 400));
+
   return (
-    div('.sun', {style: {top: y, left: x}})
+    div('.sun', {key: 1, style: {top: y + '%', left: x + '%'}}, [
+      planet(planetRotation)
+    ])
   );
 }
 
 function planet ({x, y}) {
   return (
-    div('.planet', {style: {top: y, left: x}})
+    div('.planet', {key: 2, style: {top: y + '%', left: x + '%'}})
   );
 }
 
-export default function App ({DOM, HTTP}) {
+function rotate ({x, y}, angle) {
+  x = parseInt(x, 10);
+  y = parseInt(y, 10);
+
   return {
-    DOM: Observable.just(
+    x: (x * Math.cos(angle) - y * Math.sin(angle)),
+    y: (x * Math.sin(angle) + y * Math.cos(angle))
+  };
+}
+
+export default function App ({DOM, Animation}) {
+  return {
+    DOM: Animation.pluck('timestamp').map(t =>
       div('.galaxy', [
-        megaSun({x: '50%', y: '50%'}),
-        sun({x: '50%', y: '70%'}),
-        planet({x: '50%', y: '80%'})
+        megaSun({x: 50, y: 50}, t)
       ])
     )
   };

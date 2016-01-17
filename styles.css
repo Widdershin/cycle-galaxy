@@ -9,6 +9,13 @@ html, body {
   color: #EEE;
 }
 
+.cluster {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+}
+
 
 .galaxy div {
   position: absolute;
