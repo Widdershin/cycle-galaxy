@@ -1,7 +1,39 @@
-.hello-world {
-  color: #663399;
+html, body {
+  width: 100%;
+  height: auto;
+
+  margin: 0;
+  padding: 0;
+
+  background: #111;
+  color: #EEE;
 }
 
-.result-description {
-  margin-bottom: 5px;
+
+.galaxy div {
+  position: absolute;
+}
+
+.planet {
+  background: white;
+  width: 9px;
+  height: 9px;
+  border-radius: 9px;
+  margin-left: -4.5px;
+}
+
+.sun {
+  background: yellow;
+  width: 14px;
+  height: 14px;
+  border-radius: 14px;
+  margin-left: -7px;
+}
+
+.mega-sun {
+  background: orange;
+  margin-left: -13px;
+  width: 26px;
+  height: 26px;
+  border-radius: 26px;
 }
