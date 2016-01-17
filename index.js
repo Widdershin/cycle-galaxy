@@ -1,7 +1,7 @@
 import {run} from '@cycle/core';
 import {makeDOMDriver} from '@cycle/dom';
 import {makeHTTPDriver} from '@cycle/http';
-import {restart, restartable} from '../cycle-restart/lib/restart.js';
+import {restart, restartable} from 'cycle-restart';
 import isolate from '@cycle/isolate';
 
 var app = require('./src/app').default;
